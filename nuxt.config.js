@@ -9,7 +9,10 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-        ]
+        ],
+        bodyAttrs: {
+            class: 'bg-gray-100'
+        }
     },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
