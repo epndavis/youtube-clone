@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Navbar class="fixed w-full" />
+        <Navbar />
 
-        <Nuxt />
+        <Nuxt class="py-5" />
     </div>
 </template>
