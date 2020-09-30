@@ -39,7 +39,7 @@
                     <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                 </svg>
 
-                <span class="block bg-red-600 w-4 h-4 rounded-full absolute top-0 right-0 -mr-1 -mt-1 leading-4 text-center text-sm">
+                <span class="block bg-red-600 w-4 h-4 rounded-full absolute top-0 right-0 -mr-1 -mt-1 leading-4 text-center text-sm text-white">
                     4
                 </span>
             </a>
