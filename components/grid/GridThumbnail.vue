@@ -1,12 +1,16 @@
 <template>
-    <router-link :to="{ name: 'watch' }">
-        <div class="thumbnail relative">
+    <router-link class="block" :to="link">
+        <div class="thumbnail relative" @mouseover="onMouseOver()" @mouseleave="onMouseLeave()">
             <div class="absolute inset-0 overflow-hidden bg-gray-300">
                 <img class="w-full" :src="thumbnail">
             </div>
 
+            <div v-if="mouseover" class="absolute inset-0 overflow-hidden">
+                <img class="w-full" :src="gif">
+            </div>
+
             <div class="absolute bottom-0 right-0 p-1 text-white text-sm">
-                <span class="bg-gray-900 px-1 rounded-sm">{{ duration }}</span>
+                <span class="bg-gray-900 px-1 rounded-sm">{{ duration | formatTime }}</span>
             </div>
         </div>
     </router-link>
@@ -20,9 +24,35 @@ export default {
             required: true
         },
 
+        gif: {
+            type: String,
+            default: ''
+        },
+
         duration: {
             type: String,
             default: '0:00'
+        },
+
+        link: {
+            type: Object,
+            required: true
+        }
+    },
+
+    data () {
+        return {
+            mouseover: false
+        }
+    },
+
+    methods: {
+        onMouseOver () {
+            this.mouseover = true
+        },
+
+        onMouseLeave () {
+            this.mouseover = false
         }
     }
 }

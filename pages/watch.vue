@@ -1,8 +1,8 @@
 <template>
     <div class="container flex flex-wrap">
-        <div class="w-full lg:w-7/12 xl:w-2/3 lg:pr-5">
+        <div class="w-full lg:w-2/3 lg:pr-5 mb-4">
             <div class="bg-gray-900">
-                <img class="w-full" :src="video.thumbnail">
+                <video :src="video.video.src" controls controlsList="nodownload" />
             </div>
 
             <div class="border-b pt-3">
@@ -14,7 +14,8 @@
                     <div class="flex items-baseline text-gray-700 justify-between">
                         <div class="mr-3">
                             <p>
-                                <span class="inline-block sm:hidden">7.3M</span><span class="hidden sm:inline-block">7,370,170</span> views
+                                <span class="inline-block sm:hidden">7.3M</span>
+                                <span class="hidden sm:inline-block">7,370,170</span> views
                                 <span class="hidden sm:inline-block"><span class="text-md">&bull;</span> 18 Feb 2020</span>
                             </p>
                         </div>
@@ -93,8 +94,8 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-5/12 xl:w-1/3">
-            <div v-for="recommended in recommendations" :key="recommended.title" class="mb-3">
+        <div class="w-full lg:w-1/3">
+            <div v-for="recommended in recommendations" :key="recommended.id" class="mb-3">
                 <grid-h-item :video="recommended" />
             </div>
         </div>
@@ -103,55 +104,36 @@
 
 <script>
 export default {
-    data () {
+    key (route) {
+        return route.fullPath
+    },
+
+    watchQuery: ['v'],
+
+    asyncData ({ app, route }) {
+        return app.$axios.get(`api/videos/${route.query.v}`)
+            .then((response) => {
+                return {
+                    video: response.data.data.video,
+
+                    recommendations: response.data.data.related
+                }
+            })
+    },
+
+    head () {
         return {
-            video: {
-                title: 'Lorem ipsum dolor sit amet.',
-                length: '1:04',
-                thumbnail: 'https://source.unsplash.com/random/350x220'
-            },
-
-            recommendations: [
+            title: `${this.video.title} - ${process.env.npm_package_name}`,
+            meta: [
                 {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
+                    hid: 'description',
+                    name: 'description',
+                    content: this.video.description
                 },
-
                 {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
-                },
-
-                {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
-                },
-
-                {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
-                },
-
-                {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
-                },
-
-                {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
-                },
-
-                {
-                    title: 'Lorem ipsum dolor sit amet.',
-                    length: '1:04',
-                    thumbnail: 'https://source.unsplash.com/random/340x220'
+                    property: 'og:image',
+                    content: this.video.video.thumb,
+                    vmid: 'og:image'
                 }
             ]
         }
