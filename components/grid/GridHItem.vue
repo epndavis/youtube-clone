@@ -1,20 +1,10 @@
 <template>
     <div class="flex">
         <div class="w-40 mr-2">
-            <grid-thumbnail :thumbnail="video.thumbnail" :duration="video.length" />
+            <grid-thumbnail :thumbnail="video.video.thumb" :gif="video.video.gif" :duration="video.video.duration" :link="{ name: 'watch', query: { v: video.id }}" />
         </div>
 
-        <div class="flex-1 min-w-0">
-            <grid-data :title="video.title" />
-        </div>
-
-        <div>
-            <button class="text-gray-600 fill-current hover:text-gray-800">
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                </svg>
-            </button>
-        </div>
+        <grid-data :title="video.title" :uploaded="video.uploadedWhen" :views="video.viewCount" class="flex-1 min-w-0" />
     </div>
 </template>
 
