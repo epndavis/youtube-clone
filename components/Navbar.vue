@@ -7,16 +7,16 @@
                 </svg>
             </button>
 
-            <a class="flex items-center cursor-pointer">
+            <router-link :to="{ name: 'index' }" class="flex items-center cursor-pointer">
                 <logo class="mr-1" />
 
                 <span class="text-lg">
                     Youtube
                 </span>
-            </a>
+            </router-link>
         </div>
 
-        <div class="hidden md:block flex-1">
+        <div class="hidden md:block flex-1 px-8">
             <search />
         </div>
 
