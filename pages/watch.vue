@@ -86,12 +86,14 @@
                     </div>
 
                     <div>
-                        <button class="bg-red-700 px-4 py-2 text-white">
+                        <button class="bg-red-700 px-4 py-2 text-white rounded-sm">
                             Subscribe
                         </button>
                     </div>
                 </div>
             </div>
+
+            <comments class="pt-6" />
         </div>
 
         <div class="w-full lg:w-1/3">
