@@ -49,11 +49,60 @@ export default {
     tailwindcss: {
         config: {
             theme: {
-                container: {
-                    padding: '1rem',
-                    center: true
+                inset: {
+                    0: 0,
+                    '1/2': '50%'
+                },
+
+                extend: {
+                    width: {
+                        '1/7': '14.2857143%',
+                        '2/7': '28.5714286%',
+                        '3/7': '42.8571429%',
+                        '4/7': '57.1428571%',
+                        '5/7': '71.4285714%',
+                        '6/7': '85.7142857%'
+                    }
                 }
-            }
+            },
+
+            variants: {
+                scale: ['responsive', 'hover', 'focus', 'group-hover'],
+                display: ['responsive', 'hover', 'focus', 'group-hover']
+            },
+
+            corePlugins: {
+                container: false
+            },
+
+            plugins: [
+                function ({ addComponents }) {
+                    addComponents({
+                        '.container': {
+                            padding: '0  2rem',
+
+                            'margin-left': 'auto',
+
+                            'margin-right': 'auto',
+
+                            maxWidth: '100%',
+
+                            '@screen sm': {
+                                maxWidth: '750px'
+                            },
+                            '@screen md': {
+                                maxWidth: '980px'
+                            },
+                            '@screen lg': {
+                                maxWidth: '1120px'
+                            },
+                            '@screen xl': {
+                                maxWidth: '1400px'
+                            }
+                        }
+                    })
+                }
+            ]
         }
     },
 

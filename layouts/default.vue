@@ -2,6 +2,6 @@
     <div>
         <Navbar />
 
-        <Nuxt keep-alive max="5" class="py-5" />
+        <Nuxt keep-alive max="5" />
     </div>
 </template>
