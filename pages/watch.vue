@@ -5,7 +5,7 @@
         <div class="container flex flex-wrap">
             <div class="w-full lg:w-2/3 xl:w-5/7 lg:pr-6 mb-4 pt-5">
                 <div ref="player-container">
-                    <lazy-player id="player" :video="video.video" :next="{ name: 'watch', query: { v: recommendations[0].id }}" @changetheater="changeTheater" />
+                    <lazy-player id="player" :video="video" :next="{ name: 'watch', query: { v: next.id }}" @changetheater="changeTheater" />
                 </div>
 
                 <div class="border-b">
@@ -17,8 +17,8 @@
                         <div class="flex items-baseline text-gray-700 justify-between">
                             <div class="mr-3">
                                 <p>
-                                    <span class="inline-block sm:hidden">7.3M</span>
-                                    <span class="hidden sm:inline-block">7,370,170</span> views
+                                    <span class="inline-block sm:hidden">{{ video.view_count_shorthand }}</span>
+                                    <span class="hidden sm:inline-block">{{ video.view_count }}</span> views
                                     <span class="hidden sm:inline-block"><span class="text-md">&bull;</span> 18 Feb 2020</span>
                                 </p>
                             </div>
@@ -71,27 +71,35 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center mb-6">
-                        <div>
-                            <button class="rounded-full h-16 w-16 mr-3 overflow-hidden">
-                                <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
-                            </button>
+                    <div class="mb-6">
+                        <div class="flex items-center mb-1">
+                            <div>
+                                <button class="rounded-full h-16 w-16 mr-4 overflow-hidden">
+                                    <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+                                </button>
+                            </div>
+
+                            <div class="leading-tight flex-1">
+                                <p class="font-medium">
+                                    {{ video.channel.name }}
+                                </p>
+
+                                <p class="text-sm text-gray-600">
+                                    157k subscribers
+                                </p>
+                            </div>
+
+                            <div>
+                                <button class="bg-red-700 px-4 py-2 text-white rounded-sm">
+                                    Subscribe
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="leading-tight flex-1">
-                            <p class="font-medium">
-                                Channel Name
+                        <div class="ml-20">
+                            <p class="text-sm leading-tight">
+                                {{ video.description }}
                             </p>
-
-                            <p class="text-sm">
-                                157k subscribers
-                            </p>
-                        </div>
-
-                        <div>
-                            <button class="bg-red-700 px-4 py-2 text-white rounded-sm">
-                                Subscribe
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -100,6 +108,28 @@
             </div>
 
             <div class="w-full lg:w-1/3 xl:w-2/7 pt-5">
+                <div class="w-full mb-3 flex justify-between pr-2">
+                    <span>Up next</span>
+
+                    <div class="flex">
+                        <span class="uppercase">Autoplay</span>
+
+                        <button class="ml-2">
+                            <label for="toogleA" class="flex items-center cursor-pointer">
+                                <div class="relative w-8 h-3 bg-gray-400 rounded-full">
+                                    <input id="toogleA" type="checkbox" class="hidden">
+
+                                    <div class="absolute w-4 h-4 bg-blue-600 rounded-full -mt-2 top-1/2 left-0" />
+                                </div>
+                            </label>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pb-3 mb-3 border-b">
+                    <grid-h-item :video="next" />
+                </div>
+
                 <div v-for="recommended in recommendations" :key="recommended.id" class="mb-3">
                     <grid-h-item :video="recommended" />
                 </div>
@@ -119,10 +149,14 @@ export default {
     asyncData ({ app, route }) {
         return app.$axios.get(`api/videos/${route.query.v}`)
             .then((response) => {
+                const related = response.data.data.related
+
                 return {
                     video: response.data.data.video,
 
-                    recommendations: response.data.data.related
+                    next: related.splice(0, 1)[0],
+
+                    recommendations: related
                 }
             })
     },
@@ -150,7 +184,7 @@ export default {
                 },
                 {
                     property: 'og:image',
-                    content: this.video.video.thumb,
+                    content: this.video.thumb,
                     vmid: 'og:image'
                 }
             ]

@@ -2,6 +2,6 @@
     <div>
         <Navbar />
 
-        <Nuxt keep-alive max="5" />
+        <Nuxt keep-alive :keep-alive-props="{ include: ['Index'] }" />
     </div>
 </template>
