@@ -43,7 +43,7 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: 'https://youtube-clone.test'
+        baseURL: 'http://api.youtube-clone.test'
     },
 
     tailwindcss: {
