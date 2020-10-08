@@ -5,7 +5,13 @@
         <div class="container flex flex-wrap">
             <div class="w-full lg:w-2/3 xl:w-5/7 lg:pr-6 mb-4 pt-5">
                 <div ref="player-container">
-                    <lazy-player id="player" :video="video" :next="{ name: 'watch', query: { v: next.id }}" @changetheater="changeTheater" />
+                    <lazy-player
+                        id="player"
+                        :video="video"
+                        :next="{ name: 'watch', query: { v: next.id }}"
+                        :time="getTime()"
+                        @changetheater="changeTheater"
+                    />
                 </div>
 
                 <div class="border-b">
@@ -170,6 +176,14 @@ export default {
             }
 
             container.appendChild(document.getElementById('player'))
+        },
+
+        getTime () {
+            if (this.$route.query.t) {
+                return +this.$route.query.t
+            }
+
+            return 0
         }
     },
 
