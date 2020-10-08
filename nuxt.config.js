@@ -46,6 +46,11 @@ export default {
         baseURL: 'http://api.youtube-clone.test'
     },
 
+    loading: {
+        color: '#FF0000',
+        throttle: 300
+    },
+
     tailwindcss: {
         config: {
             theme: {
@@ -62,6 +67,10 @@ export default {
                         '4/7': '57.1428571%',
                         '5/7': '71.4285714%',
                         '6/7': '85.7142857%'
+                    },
+
+                    cursor: {
+                        none: 'none'
                     }
                 }
             },
