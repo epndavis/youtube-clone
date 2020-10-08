@@ -36,11 +36,11 @@
                     </div>
 
                     <div>
-                        <button class="uppercase rounded-sm py-2 px-3 text-sm font-medium mr-2" @click="commenting = false">
+                        <button class="btn uppercase mr-2" @click="commenting = false">
                             Cancel
                         </button>
 
-                        <button class="uppercase bg-gray-500 text-white rounded-sm py-2 px-3 text-sm font-medium">
+                        <button class="btn uppercase bg-gray-500 text-white">
                             Comment
                         </button>
                     </div>
