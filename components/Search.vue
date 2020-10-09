@@ -22,7 +22,14 @@ export default {
 
     methods: {
         search () {
-            // Perform search here
+            if (this.query.trim().length > 0) {
+                this.$router.push({
+                    name: 'results',
+                    query: {
+                        search_query: this.query
+                    }
+                })
+            }
         }
     }
 }

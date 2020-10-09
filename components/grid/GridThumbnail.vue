@@ -2,7 +2,7 @@
     <router-link class="block" :to="link">
         <div class="thumbnail relative" @mouseover="onMouseOver()" @mouseleave="onMouseLeave()">
             <div class="absolute inset-0 overflow-hidden bg-gray-300">
-                <img class="w-full" :src="thumbnail">
+                <img-lazy class="w-full" :src="thumbnail" />
             </div>
 
             <div v-if="mouseover" class="absolute inset-0 overflow-hidden">
