@@ -6,7 +6,7 @@
             <div class="transition-opacity duration-100 bg-gradient-to-t w-full absolute bottom-0 from-black top-1/2" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]" />
 
             <div class="absolute inset-0 flex justify-center items-center" @click="toggleInterfacePlay()">
-                <div v-show="playInterface" class="rounded-full h-16 w-16 text-white bg-gray-900 bg-opacity-50">
+                <div v-show="playInterface" class="rounded-full h-16 w-16 text-white bg-gray-900 bg-opacity-50 player-btn">
                     <svg v-if="!player.paused && !player.ended" class="h-full w-full fill-current" viewBox="0 0 36 36">
                         <path d="M12 26l6.5-4v-8L12 10zm6.5-4l6.5-4-6.5-4z" />
                     </svg>
@@ -235,7 +235,7 @@ export default {
             this.playInterface = true
             setTimeout(() => {
                 this.playInterface = false
-            }, 400)
+            }, 500)
             this.togglePlay()
         },
 

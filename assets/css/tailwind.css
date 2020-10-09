@@ -11,3 +11,17 @@
 button:focus {
     outline: none;
 }
+
+@keyframes player-btn-fadeout {
+    0% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+.player-btn {
+    animation: 500ms player-btn-fadeout forwards;
+}
