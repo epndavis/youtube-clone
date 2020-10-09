@@ -1,6 +1,6 @@
 import { mergeWith } from 'lodash'
 
-class Video {
+export default class Video {
     constructor ($el, defaults = {}) {
         this.defaults = mergeWith({
             volume: $el.volume,
@@ -78,6 +78,14 @@ class Video {
         return this.$el.pause()
     }
 
+    toggle () {
+        if (this.paused) {
+            return this.play()
+        }
+
+        return this.pause()
+    }
+
     replay () {
         return this.jumpTo(0).play()
     }
@@ -120,5 +128,3 @@ class Video {
         this.$el.removeEventListener('volumechange', this.onVolumeChange)
     }
 }
-
-export default Video

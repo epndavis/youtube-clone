@@ -112,6 +112,7 @@
 <script>
 import Video from '@/assets/js/video'
 import { mousePosition } from '@/assets/js/mouse'
+import { clamp } from 'lodash'
 
 export default {
     props: {
@@ -161,23 +162,11 @@ export default {
         },
 
         progress () {
-            let progress = this.currentTime / this.player.duration
-
-            if (progress > 1) {
-                progress = 1
-            }
-
-            return progress
+            return clamp(this.currentTime / this.player.duration, 0, 1)
         },
 
         buffered () {
-            let progress = this.player.buffered / this.player.duration
-
-            if (progress > 1) {
-                progress = 1
-            }
-
-            return progress
+            return clamp(this.player.buffered / this.player.duration, 0, 1)
         },
 
         volume: {
@@ -186,13 +175,7 @@ export default {
             },
 
             set (val) {
-                if (val > 1) {
-                    val = 1
-                }
-
-                if (val < 0) {
-                    val = 0
-                }
+                val = clamp(val, 0, 1)
 
                 localStorage.setItem('volume', val)
                 this.player.$el.volume = val
@@ -224,11 +207,7 @@ export default {
 
     methods: {
         togglePlay () {
-            if (this.player.paused) {
-                return this.player.play()
-            }
-
-            return this.player.pause()
+            this.player.toggle()
         },
 
         toggleInterfacePlay () {
