@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between bg-white py-3 px-6 text-gray-700">
+    <div class="navbar">
         <div class="flex items-center">
             <button class="mr-4 fill-current">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20">

@@ -6,6 +6,10 @@
     .btn {
         @apply rounded-sm py-2 px-3 text-sm font-medium;
     }
+
+    .navbar {
+        @apply flex items-center justify-between bg-white py-3 px-6 text-gray-700;
+    }
 }
 
 button:focus {
@@ -20,6 +24,29 @@ button:focus {
         opacity: 0;
         transform: scale(2);
     }
+}
+
+#video_player {
+    max-height: 80vh;
+}
+
+.fullscreen-mode .navbar {
+    position: fixed;
+}
+
+.fullscreen-mode::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+.fullscreen-mode {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.fullscreen-mode #video_player {
+    max-height: 100vh;
+    height: 100vh;
 }
 
 .player-btn {
