@@ -15,8 +15,8 @@
             </button>
         </div>
 
-        <div v-for="video in videos" :key="video.id" class="w-full mb-3">
-            <grid-results-item :video="video" />
+        <div v-for="video in videos" :key="video.id" class="w-full mb-4">
+            <grid-base current="HorizontalLarge" :video="video" />
         </div>
     </div>
 </template>
