@@ -6,7 +6,7 @@
                 :gif="video.gif"
                 :duration="video.duration"
                 :link="{ name: 'watch', query: { v: video.id }}"
-                :show-preview="showPreview"
+                :animate-preview="animatePreview"
             />
         </component>
     </div>
@@ -38,29 +38,17 @@ export default {
 
     data () {
         return {
-            showPreview: false,
-            preview: null
+            animatePreview: false
         }
-    },
-
-    beforeDestroy () {
-        clearTimeout(this.preview)
     },
 
     methods: {
         onMouseEnter () {
-            clearTimeout(this.preview)
-
-            this.showPreview = true
-
-            this.preview = setTimeout(() => {
-                this.showPreview = false
-            }, 3000)
+            this.animatePreview = true
         },
 
         onMouseLeave () {
-            this.showPreview = false
-            clearTimeout(this.preview)
+            this.animatePreview = false
         }
     }
 }
