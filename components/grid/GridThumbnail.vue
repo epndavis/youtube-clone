@@ -1,11 +1,11 @@
 <template>
     <router-link class="block" :to="link">
-        <div class="thumbnail relative" @mouseover="onMouseOver()" @mouseleave="onMouseLeave()">
+        <div class="thumbnail relative">
             <div class="absolute inset-0 overflow-hidden bg-gray-300">
                 <img-lazy class="w-full" :src="thumbnail" />
             </div>
 
-            <div v-if="mouseover" class="absolute inset-0 overflow-hidden">
+            <div v-if="showPreview" class="absolute inset-0 overflow-hidden">
                 <img class="w-full" :src="gif">
             </div>
 
@@ -31,28 +31,17 @@ export default {
 
         duration: {
             type: String,
-            default: '0:00'
+            default: '0'
         },
 
         link: {
             type: Object,
             required: true
-        }
-    },
-
-    data () {
-        return {
-            mouseover: false
-        }
-    },
-
-    methods: {
-        onMouseOver () {
-            this.mouseover = true
         },
 
-        onMouseLeave () {
-            this.mouseover = false
+        showPreview: {
+            type: Boolean,
+            default: false
         }
     }
 }

@@ -131,11 +131,11 @@
                 </div>
 
                 <div class="pb-3 mb-3 border-b">
-                    <grid-h-item :video="next" />
+                    <grid-base current="Horizontal" :video="next" />
                 </div>
 
                 <div v-for="recommended in recommendations" :key="recommended.id" class="mb-3">
-                    <grid-h-item :video="recommended" />
+                    <grid-base current="Horizontal" :video="recommended" />
                 </div>
             </div>
         </div>
