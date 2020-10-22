@@ -10,7 +10,8 @@
                         :video="video"
                         :next="{ name: 'watch', query: { v: next.id }}"
                         :time="getTime()"
-                        @changetheater="changeTheater"
+                        :in-theater="theaterMode"
+                        @changetheater="updateTheater"
                     />
                 </div>
 
@@ -160,12 +161,41 @@ export default {
 
                     next: related.splice(0, 1)[0],
 
-                    recommendations: related
+                    recommendations: related,
+
+                    theater: false
                 }
             })
     },
 
+    computed: {
+        theaterMode: {
+            get () {
+                return this.theater
+            },
+
+            set (val) {
+                localStorage.setItem('theaterMode', val)
+                this.theater = val
+
+                this.changeTheater(this.theater)
+            }
+        }
+    },
+
+    mounted () {
+        const oldTheater = localStorage.getItem('theaterMode')
+
+        if (oldTheater !== 'null') {
+            this.theaterMode = Boolean(oldTheater === 'true')
+        }
+    },
+
     methods: {
+        updateTheater (mode) {
+            this.theaterMode = mode
+        },
+
         changeTheater (mode) {
             let container = this.$refs['theater-container']
 
