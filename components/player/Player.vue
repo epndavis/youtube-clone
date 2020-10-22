@@ -110,7 +110,9 @@
 
                         <button class="h-full w-10" @click="toggleFullscreen()">
                             <svg class="w-full h-full fill-current" viewBox="0 0 36 36">
-                                <path d="M10 10 L16 10 L16 12 L12 12 L12 16 L10 16z M26 10 L26 16 L24 16 L24 12 L20 12 L20 10z M10 26 L10 20 L12 20 L12 24 L16 24 L16 26z M26 26 L26 20 L24 20 L24 24 L20 24 L20 26z" />
+                                <path v-if="!inFullscreen" d="M10 10 L16 10 L16 12 L12 12 L12 16 L10 16z M26 10 L26 16 L24 16 L24 12 L20 12 L20 10z M10 26 L10 20 L12 20 L12 24 L16 24 L16 26z M26 26 L26 20 L24 20 L24 24 L20 24 L20 26z" />
+
+                                <path v-else d="M16 16 L10 16 L10 14 L14 14 L14 10 L16 10z M20 16 L20 10 L22 10 L22 14 L26 14 L26 16z M16 20 L16 26 L14 26 L14 22 L10 22 L10 20z M20 20 L20 26 L22 26 L22 22 L26 22 L26 20z" />
                             </svg>
                         </button>
                     </div>
