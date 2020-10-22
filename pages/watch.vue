@@ -188,16 +188,38 @@ export default {
     head () {
         return {
             title: `${this.video.title} - ${process.env.npm_package_name}`,
+            link: [
+                {
+                    ref: 'image_src',
+                    href: this.video.thumb
+                }
+            ],
             meta: [
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: `${this.video.title} - ${process.env.npm_package_name}`
+                },
+
                 {
                     hid: 'description',
                     name: 'description',
                     content: this.video.description
                 },
+
+                {
+                    name: 'author',
+                    content: this.video.channel.name
+                },
+
                 {
                     property: 'og:image',
-                    content: this.video.thumb,
-                    vmid: 'og:image'
+                    content: this.video.thumb
+                },
+
+                {
+                    property: 'twitter:image',
+                    content: this.video.thumb
                 }
             ]
         }
