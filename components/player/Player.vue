@@ -1,6 +1,11 @@
 <template>
     <div class="relative bg-black" :class="{ 'mb-5': !inTheater, 'cursor-none': !showControls }" @mousemove="timeControls">
-        <video id="video_player" class="m-auto" :src="video.src" controlsList="nodownload" style="max-height: 80vh" />
+        <video
+            id="video_player"
+            class="m-auto"
+            :src="video.src"
+            controlsList="nodownload"
+        />
 
         <div v-if="loaded" class="absolute inset-0">
             <div class="transition-opacity duration-100 bg-gradient-to-t w-full absolute bottom-0 from-black top-1/2" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]" />
@@ -41,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="w-full h-10">
+                <div class="w-full h-10 relative">
                     <div class="h-full left-control float-left flex items-center">
                         <button class="h-full w-10" @click="togglePlay()">
                             <svg v-show="player.paused && !player.ended" class="h-full w-full fill-current" viewBox="0 0 36 36">
@@ -89,7 +94,13 @@
                     </div>
 
                     <div class="h-full right-control float-right">
-                        <button class="h-full w-10" @click="toggleTheater()">
+                        <button v-show="inFullscreen" class="h-full w-6 absolute left-1/2" @click="scrollToDetails()">
+                            <svg class="h-full w-full fill-current" viewBox="0 0 24 24">
+                                <path d="M7.41,8.59L12,13.17l4.59-4.58L18,10l-6,6l-6-6L7.41,8.59z" />
+                            </svg>
+                        </button>
+
+                        <button v-show="!inFullscreen" class="h-full w-10" @click="toggleTheater()">
                             <svg class="h-full w-full fill-current" viewBox="0 0 36 36">
                                 <path v-show="!inTheater" d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill-rule="evenodd" />
 
@@ -97,7 +108,7 @@
                             </svg>
                         </button>
 
-                        <button class="h-full w-10">
+                        <button class="h-full w-10" @click="toggleFullscreen()">
                             <svg class="w-full h-full fill-current" viewBox="0 0 36 36">
                                 <path d="M10 10 L16 10 L16 12 L12 12 L12 16 L10 16z M26 10 L26 16 L24 16 L24 12 L20 12 L20 10z M10 26 L10 20 L12 20 L12 24 L16 24 L16 26z M26 26 L26 20 L24 20 L24 24 L20 24 L20 26z" />
                             </svg>
@@ -132,6 +143,11 @@ export default {
         },
 
         inTheater: {
+            type: Boolean,
+            default: false
+        },
+
+        inFullscreen: {
             type: Boolean,
             default: false
         }
@@ -249,6 +265,10 @@ export default {
             this.$emit('changetheater', !this.inTheater)
         },
 
+        toggleFullscreen () {
+            this.$emit('changeFullscreen', !this.inFullscreen)
+        },
+
         timeControls () {
             clearTimeout(this.controlTimer)
 
@@ -261,6 +281,13 @@ export default {
 
         setControlDisplay () {
             this.showControls = this.player.paused || this.dragging || this.volumeDragging || this.player.ended
+        },
+
+        scrollToDetails () {
+            window.scroll({
+                top: 200,
+                behavior: 'smooth'
+            })
         },
 
         applyListeners () {
@@ -305,6 +332,20 @@ export default {
             if (e.keyCode === 32) {
                 e.preventDefault()
                 this.toggleInterfacePlay()
+            }
+
+            // f
+            if (e.keyCode === 70) {
+                this.toggleFullscreen()
+            }
+
+            // t
+            if (e.keyCode === 84) {
+                if (this.inFullscreen) {
+                    return this.toggleFullscreen()
+                }
+
+                this.toggleTheater()
             }
 
             // m

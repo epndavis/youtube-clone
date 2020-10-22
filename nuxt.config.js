@@ -73,6 +73,10 @@ export default {
 
                     cursor: {
                         none: 'none'
+                    },
+
+                    left: {
+                        '1/2': '50%'
                     }
                 }
             },
