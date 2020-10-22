@@ -1,7 +1,7 @@
 <template>
     <div class="flex">
-        <div class="w-64 mr-4">
-            <grid-thumbnail :thumbnail="video.thumb" :gif="video.gif" :duration="video.duration" :link="{ name: 'watch', query: { v: video.id }}" />
+        <div class="w-full max-w-sm mr-4">
+            <slot />
         </div>
 
         <grid-data :title="video.title" :uploaded="video.uploaded_when" :views="video.view_count_shorthand" class="flex-1 min-w-0">

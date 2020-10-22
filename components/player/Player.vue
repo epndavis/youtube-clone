@@ -129,6 +129,11 @@ export default {
         time: {
             type: Number,
             default: 0
+        },
+
+        inTheater: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -139,7 +144,6 @@ export default {
             seeking: 0,
             dragging: false,
             volumeDragging: false,
-            inTheater: false,
             showControls: true,
             controlTimer: null,
             playInterface: false
@@ -242,8 +246,7 @@ export default {
         },
 
         toggleTheater () {
-            this.inTheater = !this.inTheater
-            this.$emit('changetheater', this.inTheater)
+            this.$emit('changetheater', !this.inTheater)
         },
 
         timeControls () {

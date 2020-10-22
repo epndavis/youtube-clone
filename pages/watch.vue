@@ -10,7 +10,8 @@
                         :video="video"
                         :next="{ name: 'watch', query: { v: next.id }}"
                         :time="getTime()"
-                        @changetheater="changeTheater"
+                        :in-theater="theaterMode"
+                        @changetheater="updateTheater"
                     />
                 </div>
 
@@ -131,11 +132,11 @@
                 </div>
 
                 <div class="pb-3 mb-3 border-b">
-                    <grid-h-item :video="next" />
+                    <grid-base current="Horizontal" :video="next" />
                 </div>
 
                 <div v-for="recommended in recommendations" :key="recommended.id" class="mb-3">
-                    <grid-h-item :video="recommended" />
+                    <grid-base current="Horizontal" :video="recommended" />
                 </div>
             </div>
         </div>
@@ -160,12 +161,41 @@ export default {
 
                     next: related.splice(0, 1)[0],
 
-                    recommendations: related
+                    recommendations: related,
+
+                    theater: false
                 }
             })
     },
 
+    computed: {
+        theaterMode: {
+            get () {
+                return this.theater
+            },
+
+            set (val) {
+                localStorage.setItem('theaterMode', val)
+                this.theater = val
+
+                this.changeTheater(this.theater)
+            }
+        }
+    },
+
+    mounted () {
+        const oldTheater = localStorage.getItem('theaterMode')
+
+        if (oldTheater !== 'null') {
+            this.theaterMode = Boolean(oldTheater === 'true')
+        }
+    },
+
     methods: {
+        updateTheater (mode) {
+            this.theaterMode = mode
+        },
+
         changeTheater (mode) {
             let container = this.$refs['theater-container']
 
@@ -188,16 +218,38 @@ export default {
     head () {
         return {
             title: `${this.video.title} - ${process.env.npm_package_name}`,
+            link: [
+                {
+                    ref: 'image_src',
+                    href: this.video.thumb
+                }
+            ],
             meta: [
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: `${this.video.title} - ${process.env.npm_package_name}`
+                },
+
                 {
                     hid: 'description',
                     name: 'description',
                     content: this.video.description
                 },
+
+                {
+                    name: 'author',
+                    content: this.video.channel.name
+                },
+
                 {
                     property: 'og:image',
-                    content: this.video.thumb,
-                    vmid: 'og:image'
+                    content: this.video.thumb
+                },
+
+                {
+                    property: 'twitter:image',
+                    content: this.video.thumb
                 }
             ]
         }

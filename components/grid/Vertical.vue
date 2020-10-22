@@ -1,6 +1,6 @@
 <template>
     <div>
-        <grid-thumbnail :thumbnail="video.thumb" :gif="video.gif" :duration="video.duration" :link="{ name: 'watch', query: { v: video.id }}" />
+        <slot />
 
         <div class="flex pt-3">
             <div>
