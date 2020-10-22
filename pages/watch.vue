@@ -11,7 +11,9 @@
                         :next="{ name: 'watch', query: { v: next.id }}"
                         :time="getTime()"
                         :in-theater="theaterMode"
+                        :in-fullscreen="fullscreenMode"
                         @changetheater="updateTheater"
+                        @changeFullscreen="updateFullscreen"
                     />
                 </div>
 
@@ -144,6 +146,8 @@
 </template>
 
 <script>
+import { enterFullscreen, exitFullscreen, onFullscreenChange } from '@/assets/js/fullscreen'
+
 export default {
     key (route) {
         return route.fullPath
@@ -163,7 +167,9 @@ export default {
 
                     recommendations: related,
 
-                    theater: false
+                    theater: false,
+
+                    fullscreen: false
                 }
             })
     },
@@ -180,6 +186,32 @@ export default {
 
                 this.changeTheater(this.theater)
             }
+        },
+
+        fullscreenMode: {
+            get () {
+                return this.fullscreen
+            },
+
+            set (val) {
+                if (val) {
+                    this.changeTheater(true)
+                    document.body.classList.add('fullscreen-mode')
+                    enterFullscreen(document.documentElement)
+                } else {
+                    document.body.classList.remove('fullscreen-mode')
+
+                    if (document.fullscreenElement) {
+                        exitFullscreen()
+                    }
+
+                    if (!this.theaterMode) {
+                        this.changeTheater(false)
+                    }
+                }
+
+                this.fullscreen = val
+            }
         }
     },
 
@@ -189,11 +221,23 @@ export default {
         if (oldTheater !== 'null') {
             this.theaterMode = Boolean(oldTheater === 'true')
         }
+
+        onFullscreenChange(() => {
+            if (!document.fullscreenElement) {
+                this.fullscreenMode = false
+            } else {
+                window.scrollTo(0, 0)
+            }
+        })
     },
 
     methods: {
         updateTheater (mode) {
             this.theaterMode = mode
+        },
+
+        updateFullscreen (mode) {
+            this.fullscreenMode = mode
         },
 
         changeTheater (mode) {
