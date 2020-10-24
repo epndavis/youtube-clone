@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-pointer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
+    <div class="cursor-pointer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()" @click="animatePreview = false">
         <component :is="current" :video="video">
             <grid-thumbnail
                 :thumbnail="video.thumb"

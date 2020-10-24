@@ -94,7 +94,7 @@ export default {
                 function ({ addComponents }) {
                     addComponents({
                         '.container': {
-                            padding: '0  2rem',
+                            padding: '0  1.5rem',
 
                             'margin-left': 'auto',
 
