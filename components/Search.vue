@@ -20,6 +20,10 @@ export default {
         }
     },
 
+    beforeDestroy () {
+        this.destroyListeners()
+    },
+
     mounted () {
         this.applyListeners()
     },
@@ -38,6 +42,10 @@ export default {
 
         applyListeners () {
             document.addEventListener('keydown', this.keydown)
+        },
+
+        destroyListeners () {
+            document.removeEventListener('keydown', this.keydown)
         },
 
         keydown (e) {
