@@ -1,10 +1,10 @@
 <template>
-    <div class="flex">
-        <div class="w-full max-w-sm mr-4">
+    <div class="flex flex-wrap">
+        <div class="w-full sm:max-w-xs md:max-w-sm sm:mr-4">
             <slot />
         </div>
 
-        <grid-data :title="video.title" :uploaded="video.uploaded_when" :views="video.view_count_shorthand" class="flex-1 min-w-0">
+        <grid-data :title="video.title" :uploaded="video.uploaded_when" :views="video.view_count_shorthand" class="flex-1 min-w-0 w-full sm:w-auto mt-3 sm:mt-0">
             <div class="my-3 flex items-center text-sm">
                 <channel-icon class="h-8 w-8 mr-2" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
 
@@ -18,7 +18,7 @@
                 </a>
             </div>
 
-            <p class="leading-tight text-sm">
+            <p class="leading-tight text-sm hidden sm:block">
                 {{ video.description_short }}
             </p>
         </grid-data>
