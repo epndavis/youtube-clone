@@ -135,7 +135,7 @@
                 </div>
 
                 <div class="pb-3 mb-3 border-b">
-                    <grid-base current="Horizontal" :video="next" />
+                    <grid-base :key="next.id" current="Horizontal" :video="next" />
                 </div>
 
                 <div v-for="recommended in recommendations" :key="recommended.id" class="mb-3">
@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import { enterFullscreen, exitFullscreen, onFullscreenChange } from '@/assets/js/fullscreen'
+import { onFullscreenChange } from '@/assets/js/fullscreen'
 
 export default {
     watchQuery: ['v'],
@@ -185,17 +185,8 @@ export default {
             },
 
             set (val) {
-                if (val) {
-                    this.changeTheater(true)
-                    enterFullscreen(document.documentElement)
-                } else {
-                    if (document.fullscreenElement) {
-                        exitFullscreen()
-                    }
-
-                    if (!this.theaterMode) {
-                        this.changeTheater(false)
-                    }
+                if (!this.theaterMode) {
+                    this.changeTheater(val)
                 }
 
                 this.$store.commit('watch/setFullscreen', val)

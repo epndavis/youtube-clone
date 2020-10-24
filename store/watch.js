@@ -1,3 +1,5 @@
+import { enterFullscreen, exitFullscreen } from '@/assets/js/fullscreen'
+
 export default {
     namespaced: true,
 
@@ -24,6 +26,12 @@ export default {
         },
 
         setFullscreen (state, bool) {
+            if (bool) {
+                enterFullscreen(document.documentElement)
+            } else if (document.fullscreenElement) {
+                exitFullscreen()
+            }
+
             state.fullscreen = bool
         }
     }
