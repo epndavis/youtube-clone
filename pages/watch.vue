@@ -5,16 +5,17 @@
         <div class="container flex flex-wrap">
             <div class="w-full lg:w-2/3 xl:w-5/7 lg:pr-6 mb-4 pt-5">
                 <div ref="player-container">
-                    <lazy-player
-                        id="player"
-                        :video="video"
-                        :next="{ name: 'watch', query: { v: next.id }}"
-                        :time="getTime()"
-                        :in-theater="theaterMode"
-                        :in-fullscreen="fullscreenMode"
-                        @changetheater="updateTheater"
-                        @changeFullscreen="updateFullscreen"
-                    />
+                    <div id="player">
+                        <lazy-player
+                            :video="video"
+                            :next="{ name: 'watch', query: { v: next.id }}"
+                            :time="getTime()"
+                            :in-theater="theaterMode"
+                            :in-fullscreen="fullscreenMode"
+                            @changetheater="updateTheater"
+                            @changeFullscreen="updateFullscreen"
+                        />
+                    </div>
                 </div>
 
                 <div class="border-b">
@@ -149,10 +150,6 @@
 import { enterFullscreen, exitFullscreen, onFullscreenChange } from '@/assets/js/fullscreen'
 
 export default {
-    key (route) {
-        return route.fullPath
-    },
-
     watchQuery: ['v'],
 
     asyncData ({ app, route }) {
@@ -165,11 +162,7 @@ export default {
 
                     next: related.splice(0, 1)[0],
 
-                    recommendations: related,
-
-                    theater: false,
-
-                    fullscreen: false
+                    recommendations: related
                 }
             })
     },
@@ -177,30 +170,25 @@ export default {
     computed: {
         theaterMode: {
             get () {
-                return this.theater
+                return this.$store.getters['watch/theater']
             },
 
             set (val) {
-                localStorage.setItem('theaterMode', val)
-                this.theater = val
-
-                this.changeTheater(this.theater)
+                this.$store.commit('watch/setTheater', val)
+                this.changeTheater(val)
             }
         },
 
         fullscreenMode: {
             get () {
-                return this.fullscreen
+                return this.$store.getters['watch/fullscreen']
             },
 
             set (val) {
                 if (val) {
                     this.changeTheater(true)
-                    document.body.classList.add('fullscreen-mode')
                     enterFullscreen(document.documentElement)
                 } else {
-                    document.body.classList.remove('fullscreen-mode')
-
                     if (document.fullscreenElement) {
                         exitFullscreen()
                     }
@@ -210,7 +198,7 @@ export default {
                     }
                 }
 
-                this.fullscreen = val
+                this.$store.commit('watch/setFullscreen', val)
             }
         }
     },
@@ -262,6 +250,9 @@ export default {
     head () {
         return {
             title: `${this.video.title} - ${process.env.npm_package_name}`,
+            bodyAttrs: {
+                class: this.fullscreenMode ? 'fullscreen-mode' : ''
+            },
             link: [
                 {
                     ref: 'image_src',
