@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
@@ -33,6 +35,7 @@ export default {
     buildModules: [
         // https://go.nuxtjs.dev/eslint
         '@nuxtjs/eslint-module',
+        '@nuxtjs/google-analytics',
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss'
     ],
@@ -45,12 +48,18 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: 'http://api.youtube-clone.test'
+        baseURL: process.env.BASE_URL
     },
 
     loading: {
         color: '#FF0000',
         throttle: 300
+    },
+
+    publicRuntimeConfig: {
+        googleAnalytics: {
+            id: process.env.GOOGLE_ANALYTICS_ID
+        }
     },
 
     tailwindcss: {},

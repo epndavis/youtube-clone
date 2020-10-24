@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/google-analytics": "^2.4.0",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
     "nuxt": "^2.14.5"
   },

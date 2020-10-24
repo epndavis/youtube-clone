@@ -42,6 +42,12 @@ export default {
                     videos: response.data.data
                 }
             })
+    },
+
+    head () {
+        return {
+            title: `${this.$route.query.search_query} - Youtube Clone`
+        }
     }
 }
 </script>

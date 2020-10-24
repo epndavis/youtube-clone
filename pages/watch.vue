@@ -243,7 +243,7 @@ export default {
     },
 
     head () {
-        const title = `${this.video.title} - ${process.env.npm_package_name}`
+        const title = `${this.video.title} - Youtube Clone`
 
         return {
             title,
