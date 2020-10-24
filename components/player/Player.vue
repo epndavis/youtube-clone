@@ -1,11 +1,15 @@
 <template>
-    <div class="relative bg-black" :class="{ 'mb-5': !inTheater, 'cursor-none': !showControls }" @mousemove="timeControls">
+    <div class="relative bg-black text-white" :class="{ 'mb-5': !inTheater, 'cursor-none': !showControls }" @mousemove="timeControls">
         <video
             id="video_player"
             class="m-auto"
             :src="video.src"
             controlsList="nodownload"
         />
+
+        <div v-show="inFullscreen" class="absolute top-0 w-full p-3 text-3xl" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]">
+            {{ video.title }}
+        </div>
 
         <div v-if="loaded" class="absolute inset-0">
             <div class="transition-opacity duration-100 bg-gradient-to-t w-full absolute bottom-0 from-black top-1/2" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]" />
