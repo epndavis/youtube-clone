@@ -8,7 +8,7 @@
     }
 
     .navbar {
-        @apply flex items-center justify-between bg-white py-3 px-6 text-gray-700 w-full;
+        @apply flex items-center justify-between bg-white py-3 px-6 text-gray-700 w-full fixed top-0 z-40;
     }
 
     .navbar[dark] {
@@ -22,6 +22,14 @@
     .navbar[dark] .search-bar button {
         @apply bg-gray-700 border-gray-700 text-gray-600;
     }
+}
+
+.standard-mode {
+    margin-top: 58px;
+}
+
+.navbar.navtop {
+    top: -58px;
 }
 
 button:focus {

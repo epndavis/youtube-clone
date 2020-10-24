@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar" :dark="theater">
+    <div class="navbar" :dark="theater && $route.name === 'watch'" :class="{'navtop': top && fullscreen, 'transition-all duration-300': fullscreen}">
         <div class="flex items-center">
             <button class="mr-4 fill-current">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20">
@@ -56,13 +56,27 @@ import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
-            searchOpen: false
+            searchOpen: false,
+            top: false
         }
     },
 
     computed: {
         ...mapGetters({
-            theater: 'watch/theater'
+            theater: 'watch/theater',
+            fullscreen: 'watch/fullscreen'
+        })
+    },
+
+    watch: {
+        fullscreen () {
+            this.top = window.scrollY === 0
+        }
+    },
+
+    mounted () {
+        window.addEventListener('scroll', () => {
+            this.top = window.scrollY === 0
         })
     }
 }
