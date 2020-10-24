@@ -10,7 +10,7 @@
         <div v-if="loaded" class="absolute inset-0">
             <div class="transition-opacity duration-100 bg-gradient-to-t w-full absolute bottom-0 from-black top-1/2" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]" />
 
-            <div class="absolute inset-0 flex justify-center items-center" @click="toggleInterfacePlay()">
+            <div class="absolute inset-0 flex justify-center items-center" @dblclick="toggleFullscreen()" @click="toggleInterfacePlay()">
                 <div v-show="playInterface" class="rounded-full h-16 w-16 text-white bg-gray-900 bg-opacity-50 player-btn">
                     <svg v-if="!player.paused && !player.ended" class="h-full w-full fill-current" viewBox="0 0 36 36">
                         <path d="M12 26l6.5-4v-8L12 10zm6.5-4l6.5-4-6.5-4z" />
@@ -330,40 +330,73 @@ export default {
                 return
             }
 
+            // 1 - 9
+            if (e.keyCode >= 49 && e.keyCode <= 57) {
+                this.setPercentageTime((e.keyCode - 48) * 10)
+                return
+            }
+
+            switch (e.keyCode) {
             // (space)
-            if (e.keyCode === 32) {
+            case 32: {
                 e.preventDefault()
                 this.toggleInterfacePlay()
+                break
+            }
+
+            // (left)
+            case 37: {
+                this.currentTime = this.currentTime - 5
+                break
+            }
+
+            // (right)
+            case 39: {
+                this.currentTime = this.currentTime + 5
+                break
+            }
+
+            // 0
+            case 48: {
+                this.setPercentageTime(0)
+                break
             }
 
             // f
-            if (e.keyCode === 70) {
+            case 70: {
                 this.toggleFullscreen()
+                break
+            }
+
+            // m
+            case 77: {
+                this.toggleMute()
+                break
+            }
+
+            // n
+            case 78: {
+                if (e.shiftKey) {
+                    this.$router.push(this.next)
+                }
+
+                break
             }
 
             // t
-            if (e.keyCode === 84) {
+            case 84: {
                 if (this.inFullscreen) {
                     return this.toggleFullscreen()
                 }
 
                 this.toggleTheater()
+                break
             }
+            }
+        },
 
-            // m
-            if (e.keyCode === 77) {
-                this.toggleMute()
-            }
-
-            // n
-            if (e.keyCode === 78 && e.shiftKey) {
-                this.$router.push(this.next)
-            }
-
-            // t
-            if (e.keyCode === 84) {
-                this.toggleTheater()
-            }
+        setPercentageTime (val) {
+            this.currentTime = this.video.duration * (val / 100)
         }
     }
 }
