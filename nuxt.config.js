@@ -1,6 +1,9 @@
 require('dotenv').config()
 
 export default {
+    server: {
+        port: process.env.APP_PORT
+    },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: 'Youtube Clone',
