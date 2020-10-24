@@ -98,7 +98,11 @@
                             </div>
 
                             <div>
-                                <button class="btn bg-red-700 text-white">
+                                <button v-if="video.channel.verified" class="btn uppercase border border-blue-500 px-5 text-blue-500">
+                                    Join
+                                </button>
+
+                                <button class="btn uppercase bg-red-700 text-white ml-2">
                                     Subscribe
                                 </button>
                             </div>
@@ -239,8 +243,10 @@ export default {
     },
 
     head () {
+        const title = `${this.video.title} - ${process.env.npm_package_name}`
+
         return {
-            title: `${this.video.title} - ${process.env.npm_package_name}`,
+            title,
             bodyAttrs: {
                 class: this.fullscreenMode ? 'fullscreen-mode' : ''
             },
@@ -254,7 +260,7 @@ export default {
                 {
                     hid: 'title',
                     name: 'title',
-                    content: `${this.video.title} - ${process.env.npm_package_name}`
+                    content: title
                 },
 
                 {
