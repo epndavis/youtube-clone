@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div class="navbar" :dark="theater">
         <div class="flex items-center">
             <button class="mr-4 fill-current">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20">
@@ -28,9 +28,8 @@
             </button>
 
             <router-link :to="{ name: 'upload' }" class="mr-5 cursor-pointer">
-                <svg class="h-8 w-5 fill-current" viewBox="0 0 280 180">
-                    <path d="M0 0 L220 0 L220 180 L0 180 Z M200 90 L280 0 L280 180 Z" />
-                    <path fill="white" d="M95 20 L95 160 L125 160 L125 20 Z M40 75 L40 105 L180 105 L180 75 Z" />
+                <svg class="h-8 w-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z" />
                 </svg>
             </router-link>
 
@@ -52,11 +51,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     data () {
         return {
             searchOpen: false
         }
+    },
+
+    computed: {
+        ...mapGetters({
+            theater: 'watch/theater'
+        })
     }
 }
 </script>
