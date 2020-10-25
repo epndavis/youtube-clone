@@ -88,9 +88,7 @@
                             </div>
 
                             <div class="leading-tight flex-1">
-                                <p class="font-medium">
-                                    {{ video.channel.name }}
-                                </p>
+                                <channel-name class="font-medium" :channel="video.channel" />
 
                                 <p class="text-sm text-gray-600">
                                     157k subscribers
