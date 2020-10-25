@@ -2,7 +2,7 @@
     <router-link class="block" :to="link">
         <div class="thumbnail relative">
             <div class="absolute inset-0 overflow-hidden bg-gray-300">
-                <img-lazy class="w-full" :src="thumbnail" />
+                <img-lazy class="w-full" :src="thumbnail" :alt="alt" />
             </div>
 
             <div class="absolute bottom-0 right-0 p-1 text-white text-sm">
@@ -28,6 +28,11 @@ export default {
         thumbnail: {
             type: String,
             required: true
+        },
+
+        alt: {
+            type: String,
+            default: 'Video Thumbnail'
         },
 
         gif: {

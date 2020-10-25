@@ -21,13 +21,13 @@
         </div>
 
         <div class="flex items-center">
-            <button class="mr-5 md:hidden" @click="searchOpen = true">
+            <button class="mr-5 md:hidden" aria-label="open-search" @click="searchOpen = true">
                 <svg class="h-5 w-5 m-auto fill-current" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                 </svg>
             </button>
 
-            <button class="mr-5 cursor-pointer">
+            <button class="mr-5 cursor-pointer" aria-label="upload">
                 <svg class="h-8 w-6 fill-current" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z" />
                 </svg>
@@ -43,7 +43,7 @@
                 </span>
             </a>
 
-            <a href="https://epndavis.com" target="_blank" class="h-8 w-8 rounded-full overflow-hidden">
+            <a href="https://epndavis.com" target="_blank" rel="noreferrer" class="h-8 w-8 rounded-full overflow-hidden">
                 <img class="h-full w-full object-cover" src="/images/lovable-thumbnail.jpg">
             </a>
         </div>

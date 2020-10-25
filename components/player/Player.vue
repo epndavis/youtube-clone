@@ -52,7 +52,7 @@
 
                 <div class="w-full h-10 relative">
                     <div class="h-full left-control float-left flex items-center">
-                        <button class="h-full w-10" @click="togglePlay()">
+                        <button class="h-full w-10" aria-label="play|pause" @click="togglePlay()">
                             <svg v-show="player.paused && !player.ended" class="h-full w-full fill-current" viewBox="0 0 36 36">
                                 <path d="M12 26l6.5-4v-8L12 10zm6.5-4l6.5-4-6.5-4z" />
                             </svg>
@@ -73,7 +73,7 @@
                         </router-link>
 
                         <div class="h-full flex items-center group">
-                            <button class="h-full w-10" @click="toggleMute()">
+                            <button class="h-full w-10" aria-label="control-volume" @click="toggleMute()">
                                 <svg class="w-full h-full fill-current" viewBox="0 0 36 36">
                                     <path d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 Z" />
 
@@ -98,13 +98,13 @@
                     </div>
 
                     <div class="h-full right-control float-right">
-                        <button v-show="inFullscreen" class="h-full w-6 absolute left-1/2" @click="scrollToDetails()">
+                        <button v-show="inFullscreen" class="h-full w-6 absolute left-1/2" aria-label="fullscreen-scroll" @click="scrollToDetails()">
                             <svg class="h-full w-full fill-current" viewBox="0 0 24 24">
                                 <path d="M7.41,8.59L12,13.17l4.59-4.58L18,10l-6,6l-6-6L7.41,8.59z" />
                             </svg>
                         </button>
 
-                        <button v-show="!inFullscreen" class="h-full w-10" @click="toggleTheater()">
+                        <button v-show="!inFullscreen" class="h-full w-10" aria-label="theater" @click="toggleTheater()">
                             <svg class="h-full w-full fill-current" viewBox="0 0 36 36">
                                 <path v-show="!inTheater" d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill-rule="evenodd" />
 
@@ -112,7 +112,7 @@
                             </svg>
                         </button>
 
-                        <button class="h-full w-10" @click="toggleFullscreen()">
+                        <button class="h-full w-10" aria-label="fullscreen" @click="toggleFullscreen()">
                             <svg class="w-full h-full fill-current" viewBox="0 0 36 36">
                                 <path v-if="!inFullscreen" d="M10 10 L16 10 L16 12 L12 12 L12 16 L10 16z M26 10 L26 16 L24 16 L24 12 L20 12 L20 10z M10 26 L10 20 L12 20 L12 24 L16 24 L16 26z M26 26 L26 20 L24 20 L24 24 L20 24 L20 26z" />
 

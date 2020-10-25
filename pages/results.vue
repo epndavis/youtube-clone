@@ -1,7 +1,7 @@
 <template>
     <div class="container flex flex-wrap py-5 lg:w-6/7 xl:w-5/7">
         <div class="w-full mb-4 border-b">
-            <button class="flex items-center py-1">
+            <button class="flex items-center py-1" aria-label="filter-options">
                 <svg class="w-6 h-6 inline-block fill-current text-gray-600 mr-1" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                     <g>
                         <path d="M0 0h24v24H0z" fill="none" />
