@@ -10,7 +10,7 @@ export default {
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: '' },
+            { hid: 'description', name: 'description', content: 'A small project I did to teach myself server side rendering with NUXTjs and Laravel APIs' },
             { name: 'msapplication-TileColor', content: '#da532c' },
             { name: 'theme-color', content: '#ffffff' }
         ],
