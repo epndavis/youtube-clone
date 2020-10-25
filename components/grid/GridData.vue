@@ -1,6 +1,6 @@
 <template>
     <div class="relative pr-5">
-        <h2 class="text-md mb-1 font-medium leading-tight truncate">
+        <h2 class="text-md mb-1 font-medium leading-tight truncate" :title="title">
             {{ title }}
         </h2>
 
