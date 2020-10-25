@@ -15,6 +15,12 @@
             </button>
         </div>
 
+        <div v-if="videos.length === 0">
+            <p class="text-lg">
+                Sorry, no results found for: {{ $route.query.search_query }}
+            </p>
+        </div>
+
         <div v-for="video in videos" :key="video.id" class="w-full mb-4">
             <grid-base current="HorizontalLarge" :video="video" />
         </div>
