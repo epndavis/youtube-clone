@@ -8,7 +8,7 @@
                     <div id="player">
                         <lazy-player
                             :video="video"
-                            :next="{ name: 'watch', query: { v: next.id }}"
+                            :next="next.id ? { name: 'watch', query: { v: next.id }} : null"
                             :time="getTime()"
                             :in-theater="theaterMode"
                             :in-fullscreen="fullscreenMode"
@@ -119,7 +119,7 @@
                 <comments class="pt-6" />
             </div>
 
-            <div class="w-full lg:w-1/3 xl:w-2/7 pt-5">
+            <div v-if="recommendations.length > 0" class="w-full lg:w-1/3 xl:w-2/7 pt-5">
                 <div class="w-full mb-3 flex justify-between pr-2">
                     <span>Up next</span>
 
@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="pb-3 mb-3 border-b">
+                <div v-if="next.id" class="pb-3 mb-3 border-b">
                     <grid-base :key="next.id" current="Horizontal" :video="next" />
                 </div>
 
@@ -164,7 +164,7 @@ export default {
                 return {
                     video: response.data.data.video,
 
-                    next: related.splice(0, 1)[0],
+                    next: related.splice(0, 1)[0] ?? {},
 
                     recommendations: related
                 }
