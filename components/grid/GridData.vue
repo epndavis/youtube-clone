@@ -4,9 +4,9 @@
             {{ title }}
         </h2>
 
-        <div class="text-gray-600 leading-5 text-sm">
+        <div class="text-gray-600 leading-tight text-sm">
             <p v-if="channel">
-                <channel-name :channel="channel" />
+                <channel-name class="leading-5" :channel="channel" />
             </p>
 
             <p>
