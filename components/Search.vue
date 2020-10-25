@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="search">
-        <div class="search-bar flex items-center w-full max-w-2xl m-auto">
+        <div class="search-bar flex items-stretch w-full max-w-2xl m-auto">
             <input ref="search" v-model="query" class="px-3 py-1 text-md border border-r-0 rounded-l-sm outline-none flex-1" type="text" placeholder="Search">
 
             <button class="bg-gray-100 hover:bg-gray-200 w-16 border text-gray-600 hover:text-gray-800 rounded-r-sm" aria-label="search">
