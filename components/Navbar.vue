@@ -44,7 +44,7 @@
             </a>
 
             <a href="https://epndavis.com" target="_blank" class="h-8 w-8 rounded-full overflow-hidden">
-                <img class="h-full w-full object-cover" src="/images/me-thumbnail.jpg">
+                <img class="h-full w-full object-cover" src="/images/lovable-thumbnail.jpg">
             </a>
         </div>
     </div>
