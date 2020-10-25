@@ -6,6 +6,9 @@ export default {
     },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
+        htmlAttrs: {
+            lang: 'en'
+        },
         title: 'Youtube Clone',
         meta: [
             { charset: 'utf-8' },
