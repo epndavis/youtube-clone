@@ -87,7 +87,7 @@
                                 <channel-icon class=" h-16 w-16 mr-4" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
                             </div>
 
-                            <div class="leading-tight flex-1">
+                            <div class="leading-5 flex-1">
                                 <channel-name class="font-medium" :channel="video.channel" />
 
                                 <p class="text-sm text-gray-600">
