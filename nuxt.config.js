@@ -4,6 +4,8 @@ export default {
     server: {
         port: process.env.APP_PORT
     },
+
+    modern: 'client',
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         htmlAttrs: {
@@ -49,7 +51,8 @@ export default {
         '@nuxtjs/eslint-module',
         '@nuxtjs/google-analytics',
         // https://go.nuxtjs.dev/tailwindcss
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/device'
     ],
 
     // Modules (https://go.nuxtjs.dev/config-modules)

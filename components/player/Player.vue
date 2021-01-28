@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="transition-opacity duration-100 text-white absolute bottom-0 w-full px-3 flex flex-wrap" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]">
+            <div class="transition-opacity duration-100 text-white absolute bottom-0 w-full px-0 sm:px-3 flex flex-wrap" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]">
                 <div
                     ref="player-slider"
                     class="w-full relative group cursor-pointer pt-3 pb-2 -mb-2 z-10"
@@ -104,13 +104,15 @@
                             </svg>
                         </button>
 
-                        <button v-show="!inFullscreen" class="h-full w-10" aria-label="theater" @click="toggleTheater()">
-                            <svg class="h-full w-full fill-current" viewBox="0 0 36 36">
-                                <path v-show="!inTheater" d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill-rule="evenodd" />
+                        <desktop>
+                            <button v-show="!inFullscreen" class="h-full w-10" aria-label="theater" @click="toggleTheater()">
+                                <svg class="h-full w-full fill-current" viewBox="0 0 36 36">
+                                    <path v-show="!inTheater" d="m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z" fill-rule="evenodd" />
 
-                                <path v-show="inTheater" d="m 26,13 0,10 -16,0 0,-10 z m -14,2 12,0 0,6 -12,0 0,-6 z" fill-rule="evenodd" />
-                            </svg>
-                        </button>
+                                    <path v-show="inTheater" d="m 26,13 0,10 -16,0 0,-10 z m -14,2 12,0 0,6 -12,0 0,-6 z" fill-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </desktop>
 
                         <button class="h-full w-10" aria-label="fullscreen" @click="toggleFullscreen()">
                             <svg class="w-full h-full fill-current" viewBox="0 0 36 36">

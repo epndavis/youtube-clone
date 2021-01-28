@@ -1,26 +1,40 @@
 <template>
     <div>
-        <div ref="theater-container" class="w-full" />
+        <div ref="theater-container" class="w-full">
+            <mobile>
+                <lazy-player
+                    :video="video"
+                    :next="next.id ? { name: 'watch', query: { v: next.id }} : null"
+                    :time="getTime()"
+                    :in-theater="theaterMode"
+                    :in-fullscreen="fullscreenMode"
+                    @changetheater="updateTheater"
+                    @changeFullscreen="updateFullscreen"
+                />
+            </mobile>
+        </div>
 
         <div class="container flex flex-wrap">
             <div class="w-full lg:w-2/3 xl:w-5/7 lg:pr-6 mb-4 pt-5">
-                <div ref="player-container">
-                    <div id="player">
-                        <lazy-player
-                            :video="video"
-                            :next="next.id ? { name: 'watch', query: { v: next.id }} : null"
-                            :time="getTime()"
-                            :in-theater="theaterMode"
-                            :in-fullscreen="fullscreenMode"
-                            @changetheater="updateTheater"
-                            @changeFullscreen="updateFullscreen"
-                        />
+                <desktop>
+                    <div ref="player-container">      
+                        <div id="player">
+                            <lazy-player
+                                :video="video"
+                                :next="next.id ? { name: 'watch', query: { v: next.id }} : null"
+                                :time="getTime()"
+                                :in-theater="theaterMode"
+                                :in-fullscreen="fullscreenMode"
+                                @changetheater="updateTheater"
+                                @changeFullscreen="updateFullscreen"
+                            />
+                        </div>
                     </div>
-                </div>
+                </desktop>
 
                 <div class="border-b">
                     <div class="w-full border-b mb-4">
-                        <h1 class="text-xl mb-2">
+                        <h1 class="text-lg font-medium sm:font-normal sm:text-xl mb-2">
                             {{ video.title }}
                         </h1>
 
@@ -84,7 +98,7 @@
                     <div class="mb-6">
                         <div class="flex items-center mb-1">
                             <div>
-                                <channel-icon class=" h-16 w-16 mr-4" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
+                                <channel-icon class="h-12 w-12 sm:h-16 sm:w-16 mr-4" />
                             </div>
 
                             <div class="leading-5 flex-1">
@@ -172,6 +186,10 @@ export default {
     computed: {
         theaterMode: {
             get () {
+                if (this.$device.isMobile) {
+                    return true
+                }
+
                 return this.$store.getters['watch/theater']
             },
 
@@ -222,6 +240,10 @@ export default {
         },
 
         changeTheater (mode) {
+            if (this.$device.isMobile) {
+                return
+            }
+
             let container = this.$refs['theater-container']
 
             if (!mode) {

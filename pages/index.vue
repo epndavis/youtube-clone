@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-5">
+    <div class="container pb-5 sm:py-5 ">
         <div v-if="loading" class="flex flex-wrap">
             <div v-for="index in 12" :key="index" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:px-2 mb-8 sm:mb-12">
                 <div class="thumbnail content-placeholder" />
