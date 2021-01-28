@@ -87,12 +87,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.thumbnail:after {
-    content: '';
-    display: block;
-    width: 100%;
-    padding-top: 56.25%;
-}
-</style>
