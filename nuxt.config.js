@@ -5,7 +5,9 @@ export default {
         port: process.env.APP_PORT
     },
 
-    modern: 'client',
+    modern: process.env.NODE_ENV === 'production' ? 'client' : false,
+
+    srcDir: 'src/',
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         htmlAttrs: {
@@ -77,9 +79,6 @@ export default {
         }
     },
 
-    tailwindcss: {},
-
     // Build Configuration (https://go.nuxtjs.dev/config-build)
-    build: {
-    }
+    build: {}
 }
