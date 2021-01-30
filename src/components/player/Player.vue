@@ -7,7 +7,7 @@
             controlsList="nodownload"
         />
 
-        <div v-show="inFullscreen" class="absolute top-0 w-full p-3 text-3xl" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]">
+        <div v-show="inFullscreen" class="absolute top-0 w-full p-3 text-xl sm:text-3xl" :class="[ !showControls ? 'opacity-0': 'opacity-100' ]">
             {{ video.title }}
         </div>
 

@@ -23,6 +23,20 @@
                 <grid-base current="Vertical" :video="video" />
             </div>
         </div>
+
+        <div v-if="fetching" class="loader w-10 text-gray-500 mb-6 mx-auto">
+            <svg class="circular stroke-current absolute inset-0" viewBox="25 25 50 50">
+                <circle
+                    class="path"
+                    cx="50"
+                    cy="50"
+                    r="20"
+                    fill="none"
+                    stroke-width="4"
+                    stroke-miterlimit="10"
+                />
+            </svg>
+        </div>
     </div>
 </template>
 
@@ -33,17 +47,57 @@ export default {
     data () {
         return {
             videos: [],
-            loading: true
+            loading: true,
+            fetching: false,
+            complete: false,
+            id: 0
         }
     },
 
     mounted () {
-        this.$axios.get('api/videos')
-            .then((response) => {
-                this.videos = response.data.data
-            }).finally(() => {
-                this.loading = false
+        this.fetch().finally(() => {
+            this.loading = false
+        })
+
+        document.addEventListener('scroll', this.scroll)
+    },
+
+    beforeDestroy () {
+        document.removeEventListener('scroll', this.scroll)
+    },
+
+    methods: {
+        fetch () {
+            return this.$axios.get('api/videos', {
+                params: {
+                    id: this.id
+                }
             })
+                .then((response) => {
+                    this.videos = this.videos.concat(response.data.data)
+
+                    if (response.data.data.length === 0) {
+                        this.complete = true
+                        document.removeEventListener('scroll', this.scroll)
+                        return
+                    }
+
+                    this.id = this.videos[this.videos.length - 1].order
+                })
+        },
+
+        scroll () {
+            if (
+                !this.complete &&
+                !this.fetching &&
+                Math.ceil(window.innerHeight + document.documentElement.scrollTop) >= document.documentElement.offsetHeight
+            ) {
+                this.fetching = true
+                this.fetch().finally(() => {
+                    this.fetching = false
+                })
+            }
+        }
     }
 }
 </script>
