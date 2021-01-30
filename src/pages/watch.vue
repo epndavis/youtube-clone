@@ -17,7 +17,7 @@
         <div class="container flex flex-wrap">
             <div class="w-full lg:w-2/3 xl:w-5/7 lg:pr-6 mb-4 pt-5">
                 <desktop>
-                    <div ref="player-container">      
+                    <div ref="player-container">
                         <div id="player">
                             <lazy-player
                                 :video="video"
@@ -40,11 +40,9 @@
 
                         <div class="flex flex-wrap items-baseline text-gray-700 justify-between">
                             <div class="mr-3 mb-3 sm:mb-0">
-                                <p>
-                                    <span class="inline-block sm:hidden">{{ video.view_count_shorthand }}</span>
-                                    <span class="hidden sm:inline-block">{{ video.view_count }}</span> views
-                                    <span class="hidden sm:inline-block"><span class="text-md">&bull;</span> 18 Feb 2020</span>
-                                </p>
+                                <span class="inline-block sm:hidden">{{ video.view_count_shorthand }}</span>
+                                <span class="hidden sm:inline-block">{{ video.view_count }}</span> views
+                                <span class="hidden sm:inline-block"><span class="text-md">&bull;</span> 18 Feb 2020</span>
                             </div>
 
                             <div class="flex mb-3">
@@ -97,9 +95,7 @@
 
                     <div class="mb-6">
                         <div class="flex items-center mb-1">
-                            <div>
-                                <channel-icon class="h-12 w-12 sm:h-16 sm:w-16 mr-4" />
-                            </div>
+                            <channel-icon class="h-12 w-12 sm:h-16 sm:w-16 mr-4" src="/images/me-thumbnail.jpg" />
 
                             <div class="leading-5 flex-1">
                                 <channel-name class="font-medium" :channel="video.channel" />

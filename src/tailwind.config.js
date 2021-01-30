@@ -22,7 +22,7 @@ module.exports = {
     separator: ':',
     theme: {
         extend: {
-            inset:{
+            inset: {
                 '1/2': '50%'
             },
 
