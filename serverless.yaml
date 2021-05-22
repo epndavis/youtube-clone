@@ -1,0 +1,55 @@
+service: youtube-clone
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'prod'}
+  region: eu-west-1
+  lambdaHashingVersion: 20201221
+  environment: 
+    BASE_URL: ${env:BASE_URL, ''}
+  apiGateway:
+    shouldStartNameWithService: true
+
+package:
+  patterns:
+    - '!src/**'
+    - '!.nuxt/**'
+    - '!.env.example'
+    - '!Dockerfile'
+    - '!docker-compose.yml'
+    - '!package.json'
+    - '!package-lock.json'
+    - src/static/**
+    - .nuxt/dist/**
+
+functions:
+  nuxt:
+    handler: index.nuxt
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+
+plugins:
+  - serverless-apigw-binary
+  - serverless-domain-manager
+  - serverless-offline
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
+  serverless-offline:
+    noPrependStageInUrl: true
+  customDomain:
+    domainName: ${env:DOMAIN_NAME, ''}
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    certificateName: '*.epndavis.com'
+    endpointType: 'regional'
+    certificateArn: ${env:CERTIFICATE_ARN, ''}
+    # endpointType: 'regional'
+    # if the ACM certificate is created in a region except for `'us-east-1'` you need `endpointType: 'regional'`

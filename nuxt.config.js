@@ -1,9 +1,7 @@
 require('dotenv').config()
 
-export default {
-    server: {
-        port: process.env.APP_PORT
-    },
+module.exports = {
+    telemetry: false,
 
     modern: process.env.NODE_ENV === 'production' ? 'client' : false,
 
@@ -33,6 +31,10 @@ export default {
         }
     },
 
+    publicRuntimeConfig: {
+        gtagId: process.env.GOOGLE_ANALYTICS_ID
+    },
+
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
         '~assets/css/tailwind.css'
@@ -41,7 +43,8 @@ export default {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         '@/plugins/filters',
-        { src: '@/plugins/observer', mode: 'client' }
+        { src: '@/plugins/observer', mode: 'client' },
+        { src: '@/plugins/analytics', mode: 'client' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -51,7 +54,6 @@ export default {
     buildModules: [
         // https://go.nuxtjs.dev/eslint
         '@nuxtjs/eslint-module',
-        '@nuxtjs/google-analytics',
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
         '@nuxtjs/device'
@@ -71,12 +73,6 @@ export default {
     loading: {
         color: '#FF0000',
         throttle: 300
-    },
-
-    publicRuntimeConfig: {
-        googleAnalytics: {
-            id: process.env.GOOGLE_ANALYTICS_ID
-        }
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
