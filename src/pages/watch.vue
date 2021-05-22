@@ -164,7 +164,7 @@ import { onFullscreenChange } from '@/assets/js/fullscreen'
 export default {
     watchQuery: ['v'],
 
-    asyncData ({ app, route }) {
+    asyncData ({ app, route, error }) {
         return app.$axios.get(`api/videos/${route.query.v}`)
             .then((response) => {
                 const related = response.data.data.related
@@ -176,6 +176,9 @@ export default {
 
                     recommendations: related
                 }
+            })
+            .catch(() => {
+                error({ statusCode: 404, message: 'Video not found' })
             })
     },
 
