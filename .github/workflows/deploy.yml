@@ -34,7 +34,7 @@ jobs:
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
     - name: Deploy to AWS
-        env: 
-          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
-          DOMAIN_CERTIFICATE_ARN: ${{ secrets.DOMAIN_CERTIFICATE_ARN }}
+      env: 
+        DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+        DOMAIN_CERTIFICATE_ARN: ${{ secrets.DOMAIN_CERTIFICATE_ARN }}
       run: sls deploy
