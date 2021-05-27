@@ -10,7 +10,7 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js",
     "test": "jest",
-    "deploy": "npm run build && sls deploy",
+    "deploy": "serverless deploy",
     "start-sls": "npm run build && sls offline start"
   },
   "lint-staged": {
