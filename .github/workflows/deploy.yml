@@ -5,6 +5,11 @@ on:
     tags:
      - v*
 
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Deply to AWS'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
