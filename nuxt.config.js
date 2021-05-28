@@ -31,10 +31,6 @@ module.exports = {
         }
     },
 
-    publicRuntimeConfig: {
-        gtagId: process.env.GOOGLE_ANALYTICS_ID
-    },
-
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
         '~assets/css/tailwind.css'
@@ -43,8 +39,7 @@ module.exports = {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         '@/plugins/filters',
-        { src: '@/plugins/observer', mode: 'client' },
-        { src: '@/plugins/analytics', mode: 'client' }
+        { src: '@/plugins/observer', mode: 'client' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -56,7 +51,8 @@ module.exports = {
         '@nuxtjs/eslint-module',
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
-        '@nuxtjs/device'
+        '@nuxtjs/device',
+        '@/modules/analytics',
     ],
 
     // Modules (https://go.nuxtjs.dev/config-modules)
@@ -68,6 +64,10 @@ module.exports = {
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
         baseURL: process.env.BASE_URL
+    },
+
+    gTag: {
+        id: process.env.GOOGLE_ANALYTICS_ID
     },
 
     loading: {
